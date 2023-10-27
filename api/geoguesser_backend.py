@@ -29,3 +29,15 @@ def get_country():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# Define a dictionary mapping coordinates to countries
+coordinates_to_country = {
+    (35.8617, 104.1954): "China",
+    (37.0902, -95.7129): "USA",
+    (61.5240, 105.3188): "Russia",
+    (56.1304, -106.3468): "Canada",
+    (51.1657, 10.4515): "Germany",
+    (36.2048, 138.2529): "Japan",
+    (35.9078, 127.7669): "South Korea"
+}
