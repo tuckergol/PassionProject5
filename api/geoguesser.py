@@ -1,16 +1,22 @@
-# api.py
+from flask import Blueprint, jsonify
 from flask import Flask, request, jsonify
-from model import countries, get_country_info
+from flask_restful import Api, Resource # used for REST API building
 
-app = Flask(__name__)
 
-@app.route('/api/geoguesser/country-info/<country_name>', methods=['GET'])
-def get_country_info_route(country_name):
-    country_info = get_country_info(country_name)
-    if country_info:
-        return jsonify(country_info)
-    return jsonify({"error": "Country not found"}), 404
+from model.model_geoguesser import *
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8086)
-s
+geoguesser_api = Blueprint('geoguesser_api', __name__, url_prefix='/api/geoguesser')
+
+api = Api(geoguesser_api)
+
+class GeoguesserAPI:
+    class _ReadRandom(Resource):
+        def get(self):
+            country_info = get_random_country()
+            if country_info:
+                return jsonify(get_random_country())
+            return jsonify({"error": "get_random_country() failed, "}), 404
+        
+
+    api.add_resource(_ReadRandom, '/random')
+
